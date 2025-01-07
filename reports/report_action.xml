@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+
+        <!-- Report Action for Corporate Appointment -->
+        <record id="action_report_corporate_appointment" model="ir.actions.report">
+            <field name="name">Corporate Appointment Report</field>
+            <field name="model">corporate.appointment</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">appointment.report_corporate_appointment_template</field>
+            <field name="report_file">appointment.report_corporate_appointment_template</field>
+            <field name="binding_model_id" ref="model_corporate_appointment"/>
+            <field name="binding_type">report</field>
+        </record>
+
+    </data>
+</odoo>

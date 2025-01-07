@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Tree view for listing appointments -->
+    <record id="view_corporate_appointment_tree" model="ir.ui.view">
+        <field name="name">corporate.appointment.tree</field>
+        <field name="model">corporate.appointment</field>
+        <field name="arch" type="xml">
+            <tree string="Corporate Appointments">
+                <field name="title"/>
+                <field name="appointment_date"/>
+                <field name="booking_date"/>
+                <field name="employee_id"/>
+                <field name="client_name" string="Client"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form view for editing an appointment -->
+    <record id="view_corporate_appointment_form" model="ir.ui.view">
+        <field name="name">corporate.appointment.form</field>
+        <field name="model">corporate.appointment</field>
+        <field name="arch" type="xml">
+            <form string="Corporate Appointment">
+                <header>
+                    <!-- "Scheduled" button: Only visible when the state is not "scheduled" -->
+                    <button name="action_scheduled" string="Scheduled" type="object" class="btn-primary"
+                            attrs="{'invisible': [('state', '=', 'scheduled')]}"/>
+
+                    <!-- "Completed" button: Only visible when the state is "scheduled" -->
+                    <button name="action_completed" string="Completed" type="object" class="btn-success"
+                            attrs="{'invisible': [('state', '!=', 'scheduled')]}"/>
+
+                    <!-- "Cancelled" button: Only visible when the state is not "cancelled" -->
+                    <button name="action_cancelled" string="Cancelled" type="object" class="btn-danger"
+                            attrs="{'invisible': [('state', '=', 'cancelled')]}"/>
+
+                    <!-- State field with statusbar widget -->
+                    <field name="state" widget="statusbar" statusbar_visible="scheduled,completed,cancelled"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="title"/>
+                        <h1>
+                            <field name="title" placeholder="Enter the title here"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <!--                        <group string="General Information">-->
+                        <!--                            <field name="employee_id"/>-->
+                        <!--                            <field name="appointment_date"/>-->
+                        <!--&lt;!&ndash;                            <field name="booking_date"/>&ndash;&gt;-->
+                        <!--                            <field name="company_name"/>-->
+                        <!--                            <field name="contact"/>-->
+                        <!--                            <field name="location"/>-->
+                        <!--                            <field name="appointment_start"/>-->
+                        <!--                            <field name="appointment_end"/>-->
+                        <!--                            <field name="duration" readonly="1"/>-->
+                        <!--                        </group>-->
+                        <!--                        <group string="Client Information">-->
+                        <!--                            <field name="client_name"/>-->
+                        <!--                            <field name="appointment_date"/>-->
+                        <!--                            <field name="company"/>-->
+                        <!--                            <field name="phone"/>-->
+                        <!--                            <field name="email"/>-->
+                        <!--                            <field name="appointment_start"/>-->
+                        <!--                            <field name="appointment_end"/>-->
+                        <!--                            <field name="duration" readonly="1"/>-->
+                        <!--                        </group>-->
+
+                        <group string="Company Information">
+                            <field name="employee_id" placeholder="Select an employee"/>
+                            <field name="appointment_date" placeholder="Select the appointment date"/>
+                            <!-- <field name="booking_date" placeholder="Select the booking date"/> -->
+                            <field name="company_name" placeholder="Enter the company name"/>
+                            <field name="contact" placeholder="Enter contact details"/>
+                            <field name="location" placeholder="Enter the appointment email"/>
+                            <field name="appointment_start" placeholder="Enter the start time"/>
+                            <field name="appointment_end" placeholder="Enter the end time"/>
+                            <field name="duration" readonly="1"
+                                   placeholder="Duration will be calculated automatically"/>
+
+                        </group>
+                        <group string="Client Information">
+                            <field name="client_name" placeholder="Select a client"/>
+                            <field name="appointment_date" placeholder="Select the appointment date"/>
+                            <field name="company" placeholder="Enter the client company name"/>
+                            <field name="phone" placeholder="Enter the client's phone number"/>
+                            <field name="email" placeholder="Enter the client's email address"/>
+                            <field name="appointment_start" placeholder="Enter the start time"/>
+                            <field name="appointment_end" placeholder="Enter the end time"/>
+                            <field name="duration" readonly="1"
+                                   placeholder="Duration will be calculated automatically"/>
+                        </group>
+                        <notebook>
+                            <page string="Note">
+                                <field name="notes"/>
+                            </page>
+                            <page string="Client Address">
+                                <field name="address"/>
+                            </page>
+                        </notebook>
+                    </group>
+                </sheet>
+                <!--                <chatter/>-->
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action to access appointments -->
+    <record id="action_corporate_appointment" model="ir.actions.act_window">
+        <field name="name">Corporate Appointments</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">corporate.appointment</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create New Appointment
+            </p>
+        </field>
+    </record>
+</odoo>

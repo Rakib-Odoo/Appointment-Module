@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!-- Menu items to navigate to appointments -->
+    <menuitem id="menu_corporate_root" name="Appointment" sequence="1"/>
+    <menuitem id="menu_corporate_appointment" name="Manage Appointments" parent="menu_corporate_root"
+              action="action_corporate_appointment"/>
+
+</odoo>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="report_corporate_appointment_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <div class="page"
+                     style="font-family: Arial, sans-serif; margin: 20px; display: flex; flex-direction: column; min-height: 100vh;">
+
+                    <!-- Header Section -->
+                    <h3 style="text-align: center;">Corporate Appointment</h3>
+                    <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+                        <thead>
+                            <tr>
+                                <th style="border: 1px solid black; padding: 5px; width: 50%;">Appointment Title</th>
+                                <th style="border: 1px solid black; padding: 5px;">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="border: 1px solid black; padding: 5px;">
+                                    <t t-esc="doc.title"/>
+                                </td>
+                                <td style="border: 1px solid black; padding: 5px;">
+                                    <t t-esc="doc.state"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+                        <thead>
+                            <tr>
+                                <th style="border: 1px solid black; padding: 5px;">Company Name</th>
+                                <th style="border: 1px solid black; padding: 5px;">Appointment DateTime</th>
+                                <th style="border: 1px solid black; padding: 5px;">Booking Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="border: 1px solid black; padding: 5px;">
+                                    <t t-esc="doc.company_name or 'N/A'"/>
+                                </td>
+                                <td style="border: 1px solid black; padding: 5px;">
+                                    <t t-esc="doc.appointment_date.strftime('%Y-%m-%d %H:%M:%S') if doc.appointment_date else 'N/A'"/>
+                                </td>
+                                <td style="border: 1px solid black; padding: 5px;">
+                                    <t t-esc="doc.booking_date"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Client Details Section -->
+                    <h4>Client Information</h4>
+                    <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+                        <thead>
+                            <tr>
+                                <th style="border: 1px solid black; padding: 5px;">Client Name</th>
+                                <th style="border: 1px solid black; padding: 5px;">Phone</th>
+                                <th style="border: 1px solid black; padding: 5px;">Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="border: 1px solid black; padding: 5px;">
+                                    <t t-esc="doc.client_name.name or 'N/A'"/>
+                                </td>
+                                <td style="border: 1px solid black; padding: 5px;">
+                                    <t t-esc="doc.phone or 'N/A'"/>
+                                </td>
+                                <td style="border: 1px solid black; padding: 5px;">
+                                    <t t-esc="doc.email or 'N/A'"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+                        <thead>
+                            <tr>
+                                <th style="border: 1px solid black; padding: 5px;">Address</th>
+                                <th style="border: 1px solid black; padding: 5px;">Client Company</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="border: 1px solid black; padding: 5px;">
+                                    <t t-esc="doc.address or 'N/A'"/>
+                                </td>
+                                <td style="border: 1px solid black; padding: 5px;">
+                                    <t t-esc="doc.company or 'N/A'"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Appointment Time Section -->
+                    <h4>Appointment Time</h4>
+                    <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+                        <thead>
+                            <tr>
+                                <th style="border: 1px solid black; padding: 5px;">Start Time</th>
+                                <th style="border: 1px solid black; padding: 5px;">End Time</th>
+                                <th style="border: 1px solid black; padding: 5px;">Duration (hours)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="border: 1px solid black; padding: 5px;">
+                                    <t t-esc="doc.appointment_start"/>
+                                </td>
+                                <td style="border: 1px solid black; padding: 5px;">
+                                    <t t-esc="doc.appointment_end"/>
+                                </td>
+                                <td style="border: 1px solid black; padding: 5px;">
+                                    <t t-esc="doc.duration"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Footer Section -->
+                    <footer style="margin-top: auto;">
+                        <p style="text-align: right;">Thank you for scheduling with us!</p>
+                    </footer>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>
