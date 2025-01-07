@@ -14,6 +14,7 @@
     'data': [
         # security file
         'security/ir.model.access.csv',
+        'security/security_groups.xml',
 
         # views all file
         'views/appointment_view.xml',

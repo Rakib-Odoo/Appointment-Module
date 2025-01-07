@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Security Groups -->
+        <record id="group_corporate_user" model="res.groups">
+            <field name="name">Corporate Appointment User</field>
+        </record>
+
+        <record id="group_corporate_manager" model="res.groups">
+            <field name="name">Corporate Appointment Manager</field>
+        </record>
+    </data>
+</odoo>
