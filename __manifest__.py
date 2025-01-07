@@ -15,6 +15,7 @@
         # security file
         'security/ir.model.access.csv',
         'security/security_groups.xml',
+        'security/record_rules.xml',
 
         # views all file
         'views/appointment_view.xml',

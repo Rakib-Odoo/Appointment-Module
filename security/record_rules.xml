@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Rule for Corporate Appointment User: Access only their own records -->
+        <record id="rule_corporate_user_own_records" model="ir.rule">
+            <field name="name">Corporate Appointment: User Own Records</field>
+            <field name="model_id" ref="model_corporate_appointment"/>
+            <field name="groups" eval="[(4, ref('group_corporate_user'))]"/>
+            <field name="domain_force">[('employee_id.user_id', '=', user.id)]</field>
+        </record>
+
+        <!-- Rule for Corporate Appointment Manager: Full access -->
+        <record id="rule_corporate_manager_all_records" model="ir.rule">
+            <field name="name">Corporate Appointment: Manager Full Access</field>
+            <field name="model_id" ref="model_corporate_appointment"/>
+            <field name="groups" eval="[(4, ref('group_corporate_manager'))]"/>
+            <field name="domain_force">[]</field>
+        </record>
+    </data>
+</odoo>
