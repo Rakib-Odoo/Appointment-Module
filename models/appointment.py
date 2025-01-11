@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import models, fields, api,_
 
 
 class CorporateAppointment(models.Model):
@@ -9,12 +9,18 @@ class CorporateAppointment(models.Model):
 
     # Fields definition
     title = fields.Char(string="Appointment Title", required=True, tracking=True)
-    appointment_date = fields.Datetime(string='Appointment DateTime', tracking=True)
+    appointment_date = fields.Date(string='Appointment DateTime', tracking=True)
     booking_date = fields.Date(string='Booking Date', default=fields.Date.context_today, tracking=True)
     company_name = fields.Char(string='Company Name')
     employee_id = fields.Many2one('hr.employee', string="Appointment To", required=True)
     location = fields.Char(string="Email")
     contact = fields.Char(string='Mobile')
+
+    sl_no = fields.Char(
+        string="Sl No",
+        required=True, copy=False, readonly=True,
+        index='trigram',
+        default=lambda self: _('New'))
 
 
 
@@ -24,6 +30,13 @@ class CorporateAppointment(models.Model):
     email = fields.Char(string='Email')
     address = fields.Text(string='Address')
     company = fields.Char(string='Company Name')
+
+    # Address Fields
+    street = fields.Char(string='Street')
+    city = fields.Char(string='City')
+    state_id = fields.Many2one('res.country.state', string='State')
+    zip = fields.Char(string='Zip Code')
+    country_id = fields.Many2one('res.country', string='Country')
 
 
 
@@ -49,7 +62,7 @@ class CorporateAppointment(models.Model):
         ('completed', 'Completed'),
         ('cancelled', 'Cancelled')
     ], string="Status", default='scheduled')
-    notes = fields.Text(string="Notes", default='New Appointment Created.')
+    notes = fields.Text(string="Notes")
 
     def action_scheduled(self):
         self.state = 'scheduled'
@@ -59,3 +72,12 @@ class CorporateAppointment(models.Model):
 
     def action_cancelled(self):
         self.state = 'cancelled'
+
+    @api.model
+    def create(self, vals):
+        if not vals.get('notes'):
+            vals['notes'] = 'New Appointment Created.'
+        if vals.get('sl_no', _("New")) == _("New"):
+            vals['sl_no'] = self.env['ir.sequence'].next_by_code(
+                'appointment.appointment') or _("New")
+

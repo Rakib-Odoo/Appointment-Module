@@ -17,6 +17,9 @@
         'security/security_groups.xml',
         'security/record_rules.xml',
 
+        # data files
+        'data/appointment_sequence.xml',
+
         # views all file
         'views/appointment_view.xml',
 

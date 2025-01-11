@@ -13,6 +13,8 @@
                             <tr>
                                 <th style="border: 1px solid black; padding: 5px; width: 50%;">Appointment Title</th>
                                 <th style="border: 1px solid black; padding: 5px;">Status</th>
+                                <th style="border: 1px solid black; padding: 5px;">Company Name </th>
+                                <th style="border: 1px solid black; padding: 5px;">Appointment DateTime</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -23,6 +25,18 @@
                                 <td style="border: 1px solid black; padding: 5px;">
                                     <t t-esc="doc.state"/>
                                 </td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid black; padding: 5px;">
+                                    <t t-esc="doc.title"/>
+                                </td>
+                                <td style="border: 1px solid black; padding: 5px;">
+                                    <t t-esc="doc.state"/>
+                                </td>
+                                <td></td>
+                                <td></td>
                             </tr>
                         </tbody>
                     </table>
